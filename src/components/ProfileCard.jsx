@@ -236,8 +236,9 @@ const ProfileCardComponent = ({
   );
 
   const handleContactClick = useCallback(() => {
-    onContactClick?.();
-  }, [onContactClick]);
+    window.open("https://www.instagram.com/ricky_aleluia/", "_blank");
+  }, []);
+
 
   return (
     <div

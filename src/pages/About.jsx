@@ -11,14 +11,42 @@ export default function About() {
   }, []);
 
   const slides = [
-    { title: "About Ricardo Aleluia", content: "I'm a Computer Engineering student from Algarve University, currently finishing my degree. Passionate about programming, AI, and exploring new challenges." },
-    { title: "Skills", content: "Python, Java, C, OOP, Git, Fullstack Concepts, Web APIs, Networking (TCP/IP, Routing), Scrum & Agile." },
-    { title: "Experience", content: "Sales Promoter at Lado do Avesso & Real Estate Consultant at Remax." },
-    { title: "Education", content: "BSc in Computer Engineering at University of Algarve. Fluent in Portuguese & English, with some Spanish knowledge." },
-    { title: "Interests", content: "Surf, Gym, Coding & AI, Socializing, Entrepreneurship, Innovation." }
+    {
+      title: "About me:",
+      content: [
+        "FullName: Ricardo Miguel Brás Aleluia",
+        "Age: 21",
+        "Location: Faro, Algarve, Portugal",
+        "Currently studying Computer Engineering"
+      ]
+    },
+    {
+      title: "Skills",
+      content: [
+        "Algorithms & Data Structures",
+        "Java (OOP)",
+        "C (Imperative & Systems)",
+        "Python",
+        "JavaScript & React",
+        "SQL & Databases",
+        "Computer Networks (TCP/IP)",
+        "Operating Systems & Processes",
+        "Parallel & Distributed Systems",
+        "Software Engineering",
+        "Web Development (HTML/CSS/JS)",
+        "Artificial Intelligence",
+        "Human-Computer Interaction (HCI)",
+        "Graphics & Compilers",
+        "Communication & Teamwork",
+        "Project Management",
+        "Probability, Statistics & Numerical Analysis",
+        "Math: Linear Algebra, Discrete & Analysis"
+      ]
+    }
   ];
 
   const [current, setCurrent] = useState(0);
+  const isMobile = window.innerWidth < 600;
 
   const nextSlide = () => setCurrent((current + 1) % slides.length);
   const prevSlide = () => setCurrent((current - 1 + slides.length) % slides.length);
@@ -56,50 +84,99 @@ export default function About() {
         />
       </Canvas>
 
-      {/* Quadro grande com slides */}
       <div style={{
         position: 'relative',
-        width: '80vw',
-        height: '80vh',
+        width: isMobile ? '85vw' : '550px',
+        minHeight: isMobile ? '55vh' : '520px',
         margin: 'auto',
-        top: '10vh',
-        background: 'rgba(0,0,0,0.4)',
+        top: isMobile ? '8vh' : '15vh',
+        background: 'rgba(0,0,0,0.5)',
         borderRadius: '20px',
-        backdropFilter: 'blur(10px)',
-        boxShadow: '0 0 30px rgba(255,255,255,0.3)',
+        backdropFilter: 'blur(12px)',
+        boxShadow: '0 0 25px rgba(255,255,255,0.25)',
         color: '#fff',
         overflow: 'hidden',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center',
+        padding: '35px',
         zIndex: 1
       }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.8 }}
-            style={{ padding: '20px', maxWidth: '600px' }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6 }}
           >
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>{slides[current].title}</h2>
-            <p style={{ fontSize: '1.4rem', lineHeight: '1.7' }}>{slides[current].content}</p>
+            <div style={{
+              fontSize: isMobile ? '2.5rem' : '4rem',
+              fontWeight: 'bold',
+              marginBottom: '20px',
+              color: '#fff',
+              textAlign: 'left'
+            }}>
+              {slides[current].title}
+            </div>
+
+            <div style={{
+              maxHeight: isMobile ? '300px' : '320px',
+              overflowY: 'auto',
+              paddingRight: '10px'
+            }}>
+              {Array.isArray(slides[current].content) ? (
+                <ul style={{
+                  listStyleType: 'disc',
+                  textAlign: 'left',
+                  paddingLeft: '1.2rem',
+                  fontSize: isMobile ? '1.2rem' : '1.5rem',
+                  lineHeight: '1.7'
+                }}>
+                  {slides[current].content.map((point, idx) => (
+                    <li key={idx} style={{ marginBottom: '8px' }}>{point}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p style={{
+                  fontSize: isMobile ? '1.2rem' : '1.5rem',
+                  lineHeight: '1.7'
+                }}>
+                  {slides[current].content}
+                </p>
+              )}
+            </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Seta para próximo */}
+        {/* Prev */}
+        <div
+          onClick={prevSlide}
+          style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '20px',
+            fontSize: '2.5rem',
+            cursor: 'pointer',
+            color: '#fff',
+            textShadow: '0 0 8px #fff',
+            transform: 'scaleX(-1)',
+            transition: 'transform 0.3s'
+          }}
+          onMouseEnter={e => e.target.style.transform = 'scale(1.3) scaleX(-1)'}
+          onMouseLeave={e => e.target.style.transform = 'scaleX(-1)'}
+        >
+          ➔
+        </div>
+
+        {/* Next */}
         <div
           onClick={nextSlide}
           style={{
             position: 'absolute',
             bottom: '20px',
-            right: '30px',
-            fontSize: '3rem',
+            right: '20px',
+            fontSize: '2.5rem',
             cursor: 'pointer',
             color: '#fff',
-            textShadow: '0 0 10px #fff, 0 0 20px #fff',
+            textShadow: '0 0 8px #fff',
             transition: 'transform 0.3s'
           }}
           onMouseEnter={e => e.target.style.transform = 'scale(1.3)'}
@@ -108,41 +185,24 @@ export default function About() {
           ➔
         </div>
 
-        {/* Seta para anterior */}
-        <div
-          onClick={prevSlide}
-          style={{
-            position: 'absolute',
-            bottom: '20px',
-            left: '30px',
-            fontSize: '3rem',
-            cursor: 'pointer',
-            color: '#fff',
-            textShadow: '0 0 10px #fff, 0 0 20px #fff',
-            transition: 'transform 0.3s'
-          }}
-          onMouseEnter={e => e.target.style.transform = 'scale(1.3)'}
-          onMouseLeave={e => e.target.style.transform = 'scale(1)'}
-        >
-          ⇦
-        </div>
-
-        {/* Pontos para navegar */}
+        {/* Dots */}
         <div style={{
           position: 'absolute',
           bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
           display: 'flex',
-          gap: '12px'
+          gap: '10px'
         }}>
           {slides.map((_, i) => (
             <div key={i}
               onClick={() => goToSlide(i)}
               style={{
-                width: current === i ? '18px' : '12px',
-                height: current === i ? '18px' : '12px',
+                width: current === i ? '16px' : '12px',
+                height: current === i ? '16px' : '12px',
                 borderRadius: '50%',
-                background: current === i ? '#ff00ff' : '#888',
-                boxShadow: current === i ? '0 0 10px #ff00ff' : 'none',
+                background: '#fff',
+                boxShadow: current === i ? '0 0 6px #fff' : 'none',
                 cursor: 'pointer',
                 transition: 'all 0.3s'
               }}
