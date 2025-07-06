@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import GalaxyStars from '../components/GalaxyStars';
 import NebulaParticles from '../components/NebulaParticles';
+import Threads from '../components/Threads';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function About() {
@@ -16,6 +17,7 @@ export default function About() {
       content: [
         "FullName: Ricardo Miguel Brás Aleluia",
         "Age: 21",
+        "Nationality: Portuguese",
         "Location: Faro, Algarve, Portugal",
         "Currently studying Computer Engineering"
       ]
@@ -89,7 +91,7 @@ export default function About() {
         width: isMobile ? '85vw' : '550px',
         minHeight: isMobile ? '55vh' : '520px',
         margin: 'auto',
-        top: isMobile ? '8vh' : '15vh',
+        top: isMobile ? '15vh' : '25vh',
         background: 'rgba(0,0,0,0.5)',
         borderRadius: '20px',
         backdropFilter: 'blur(12px)',
@@ -97,8 +99,17 @@ export default function About() {
         color: '#fff',
         overflow: 'hidden',
         padding: '35px',
-        zIndex: 1
+        zIndex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px'
       }}>
+        
+        {/* Threads topo */}
+        <div style={{ width: '100%', height: '80px', position: 'relative' }}>
+          <Threads amplitude={0.5} distance={0.3} enableMouseInteraction={false} />
+        </div>
+
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -122,29 +133,25 @@ export default function About() {
               overflowY: 'auto',
               paddingRight: '10px'
             }}>
-              {Array.isArray(slides[current].content) ? (
-                <ul style={{
-                  listStyleType: 'disc',
-                  textAlign: 'left',
-                  paddingLeft: '1.2rem',
-                  fontSize: isMobile ? '1.2rem' : '1.5rem',
-                  lineHeight: '1.7'
-                }}>
-                  {slides[current].content.map((point, idx) => (
-                    <li key={idx} style={{ marginBottom: '8px' }}>{point}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p style={{
-                  fontSize: isMobile ? '1.2rem' : '1.5rem',
-                  lineHeight: '1.7'
-                }}>
-                  {slides[current].content}
-                </p>
-              )}
+              <ul style={{
+                listStyleType: 'disc',
+                textAlign: 'left',
+                paddingLeft: '1.2rem',
+                fontSize: isMobile ? '1.2rem' : '1.5rem',
+                lineHeight: '1.7'
+              }}>
+                {slides[current].content.map((point, idx) => (
+                  <li key={idx} style={{ marginBottom: '8px' }}>{point}</li>
+                ))}
+              </ul>
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* Threads fundo */}
+        <div style={{ width: '100%', height: '80px', position: 'relative' }}>
+          <Threads amplitude={0.5} distance={0.3} enableMouseInteraction={false} />
+        </div>
 
         {/* Prev */}
         <div

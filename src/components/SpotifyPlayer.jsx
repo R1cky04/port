@@ -78,7 +78,7 @@ export default function SpotifyPlayer() {
         onClick={() => setOpen(!open)}
         style={{
           position: 'fixed',
-          bottom: '110px',
+          bottom: '20px',
           left: open ? '230px' : '5px',
           width: '30px',
           height: '30px',

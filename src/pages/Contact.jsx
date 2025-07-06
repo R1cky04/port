@@ -16,7 +16,7 @@ export default function Contact() {
   const contacts = [
     { icon: emailIcon, text: "ricardo.m.aleluia@gmail.com", link: "mailto:ricardo.m.aleluia@gmail.com" },
     { icon: instaIcon, text: "@ricky_aleluia", link: "https://instagram.com/ricky_aleluia" },
-    { icon: whatsappIcon, text: "+351 919091248", link: "https://wa.me/351919091248" }
+    { icon: whatsappIcon, text: "+351 919 091 248", link: "https://wa.me/351919091248" }
   ];
 
   const isMobile = window.innerWidth < 600;

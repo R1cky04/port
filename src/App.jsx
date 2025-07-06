@@ -10,7 +10,7 @@ import Lambo from './pages/Lambo'
 export default function App() {
   return (
     <HashRouter>
-      <WaveTrail />
+      {/* <WaveTrail /> */}
       <GalaxyHeader />
 
       <Routes>
